@@ -27,9 +27,17 @@ This repo serves as a sandbox for:
 
 ---
 
+---
+
+## 🛠️ References
+
+- https://playwright.dev/docs/intro
+- https://playwright.dev/docs/ci
+
 ## 🚀 Running Locally
 
 ```bash
 npm install
 npx playwright install
 npx playwright test
+```

@@ -1,7 +1,6 @@
 name: Playwright Tests
 on:
   pull_request:
-    branches: [ci_setup] # Set to your target branch, or remove this line to run on all branches
 jobs:
   test:
     timeout-minutes: 60

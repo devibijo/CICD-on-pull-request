@@ -4,7 +4,6 @@ on:
     types: [labeled]
 jobs:
   lint:
-    if: ${{ github.event.label.name == 'cicd' }}
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +19,7 @@ jobs:
         run: npm run lint
 
   automation-tests:
-    if: ${{ github.event.label.name == 'cicd' }}
+    if: ${{ github.event.label.name == 'test' }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: lint

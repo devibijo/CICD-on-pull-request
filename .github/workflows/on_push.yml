@@ -1,6 +1,9 @@
 name: Jobs on push
 on:
   push:
+    branches:
+      - main
+      - master
 jobs:
   lint:
     timeout-minutes: 10

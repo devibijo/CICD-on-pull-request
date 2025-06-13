@@ -11,10 +11,10 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.0"
   },
-  "scripts": {
-    "lint": "npx eslint --ext .ts,.js .",
-    "lint-and-fix": "npx eslint . --ext .ts --fix",
-    "build": "npx playwright install --with-deps",
-    "start": "npx playwright test"
-  }
+"scripts": {
+  "lint": "npx eslint --ext .ts,.js .",
+  "lint-and-fix": "npx eslint . --ext .ts --fix",
+  "build": "playwright install --with-deps",
+  "start": "npx playwright test"
+}
 }

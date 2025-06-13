@@ -13,11 +13,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Lint code
-        run: npm lint
+        run: lint
+      - name: Lint and fix code
+        run: lint-and-fix
       - name: Install Playwright Browsers
-        run: npm build
+        run: build
       - name: Run Playwright tests
-        run: npm start
+        run: start
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

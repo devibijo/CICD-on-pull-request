@@ -13,6 +13,7 @@
   },
   "scripts": {
     "lint": "npx eslint --ext .ts,.js .",
+    "lint-and-fix": "npx eslint . --ext .ts --fix",
     "build": "npx playwright install --with-deps",
     "start": "npx playwright test"
   }

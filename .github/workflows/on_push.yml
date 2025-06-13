@@ -1,6 +1,6 @@
-name: Playwright Tests
+name: Jobs on push
 on:
-  pull_request:
+  push:
 jobs:
   test:
     timeout-minutes: 60
@@ -12,10 +12,12 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
+      - name: Lint code
+        run: npm lint
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npm build
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npm start
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

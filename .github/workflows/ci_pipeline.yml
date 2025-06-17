@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: ./.github/actions/setup-node-deps
-
+      - run: ./ci/lint_job.sh
   automation-tests:
     if: ${{ github.event.label.name == 'test' }}
     timeout-minutes: 60
@@ -19,10 +19,8 @@ jobs:
     needs: lint
     steps:
       - uses: ./.github/actions/setup-node-deps
-      - name: Install Playwright Browsers
-        run: npm run build
       - name: Run Playwright tests
-        run: npm start
+        run: ./ci/playwright_job.sh
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

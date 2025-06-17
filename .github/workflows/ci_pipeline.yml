@@ -10,7 +10,8 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/setup-node-deps
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node-deps/action.yml
       - run: ./ci/lint_job.sh
   automation-tests:
     if: ${{ github.event.label.name == 'test' }}

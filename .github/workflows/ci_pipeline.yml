@@ -15,7 +15,7 @@ jobs:
       - name: Run lint job
         run: ./ci/lint_job.sh
   automation-tests:
-    if: contains(github.event.pull_request.labels.*.name, 'test')
+    if: github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'test')
     timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: lint

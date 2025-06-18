@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./github/setup-action
+      - uses: ./.github/setup-action
       - run: ./ci/lint_job.sh
   automation-tests:
     if: ${{ github.event.label.name == 'test' }}
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - uses: ./github/actions
+      - uses: ./.github/setup-action
       - name: Run Playwright tests
         run: ./ci/playwright_job.sh
       - uses: actions/upload-artifact@v4

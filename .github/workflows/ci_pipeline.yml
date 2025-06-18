@@ -12,8 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/setup-action
-      # - name: Make lint script executable
-      # run: chmod +x ci/lint_job.sh
       - name: Run lint job
         run: ./ci/lint_job.sh
   automation-tests:
@@ -24,8 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/setup-action
-      - name: Make lint script executable
-        run: chmod +x ci/playwright_job.sh
       - name: Run Playwright tests
         run: ./ci/playwright_job.sh
       - uses: actions/upload-artifact@v4

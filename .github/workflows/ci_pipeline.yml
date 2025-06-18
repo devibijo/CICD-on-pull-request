@@ -32,7 +32,7 @@ jobs:
       - uses: ./.github/setup-action
       - name: Create .env file
         run: |
-          echo "BASE_URL=${{ vars.BASE_URL }}" > .env
+          echo "BASE_URL=${{ vars.URL }}" > .env
       - name: Run Playwright tests
         run: ./ci/playwright_job.sh
       - uses: actions/upload-artifact@v4

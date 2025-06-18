@@ -5,7 +5,6 @@
 set -euo pipefail
 
 echo "Installing Playwright Browsers..."
-echo "BASE_URL=$BASE_URL" > .env
 npm run build
 
 echo "Running Playwright tests..."

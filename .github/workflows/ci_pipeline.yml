@@ -30,9 +30,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/setup-action
+      - name: print url
+        run: echo "BASE_URL= $URL}}"
       - name: Create .env file
         run: |
-          echo "BASE_URL=${{ vars.URL }}" > .env
+          echo "BASE_URL=$URL" > .env
       - name: Run Playwright tests
         run: ./ci/playwright_job.sh
       - uses: actions/upload-artifact@v4

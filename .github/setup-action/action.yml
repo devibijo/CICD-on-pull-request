@@ -11,3 +11,7 @@ runs:
       node-version: "lts/*"
   - name: Install dependencies
     run: npm ci
+  - name: Checkout our report
+    uses: actions/checkout@v4
+    with:
+      repository: dbn17/playwright-report

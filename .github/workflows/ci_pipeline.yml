@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./setup-action
+      - uses: ./github/setup-action
       - run: ./ci/lint_job.sh
   automation-tests:
     if: ${{ github.event.label.name == 'test' }}

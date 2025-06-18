@@ -15,4 +15,4 @@ runs:
   - name: Checkout our report
     uses: actions/checkout@v4
     with:
-      repository: dbn17/playwright-report
+      repository: devibijo/CICD-on-pull-request

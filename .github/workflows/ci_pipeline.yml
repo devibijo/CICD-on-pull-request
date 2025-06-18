@@ -12,8 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/setup-action
-      - uses: chmod +x ci/lint_job.sh
-      - run: ./ci/lint_job.sh
+      - name: Make lint script executable
+        run: chmod +x ci/lint_job.sh
+      - name: Run lint job
+        run: ./ci/lint_job.sh
   # automation-tests:
   #   if: ${{ github.event.label.name == 'test' }}
   #   timeout-minutes: 60

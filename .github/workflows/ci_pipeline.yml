@@ -17,6 +17,7 @@ jobs:
   lint:
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    environment: DEV
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/setup-action
@@ -30,6 +31,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/setup-action
+      - name: print url
+        run: echo "BASE_URL=${{ vars.BASE_URL }}"
       - name: Create .env file
         run: echo "BASE_URL=${{ vars.BASE_URL }}" > .env
       - name: Print BASE_URL from .env

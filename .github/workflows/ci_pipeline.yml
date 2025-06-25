@@ -31,24 +31,21 @@ jobs:
       # url: ${{ vars.BASE_URL }}
     # needs: lint
     steps:
-      # - uses: actions/checkout@v4
-      # - uses: ./.github/setup-action
+      - uses: actions/checkout@v4
+      - uses: ./.github/setup-action
       - name: print url
         run: echo "URL is ${{ vars.BASE_URL }} "
-      # env:
-      #   BASE_URL: ${{ vars.BASE_URL }}
-      # - name: Create .env file
-      #   run: |
-      #     echo "BASE_URL=${{vars.BASE_URL}}" > .env
-      #     cat .env
+      - name: Create .env file
+        run: |
+          echo "BASE_URL=${{vars.BASE_URL}}" > .env
 
-      # - name: Print BASE_URL from .env
-      #   run: cat .env
-      # - name: Run Playwright tests
-      #   run: ./ci/playwright_job.sh
-      # - uses: actions/upload-artifact@v4
-      #   if: ${{ !cancelled() }}
-      #   with:
-      #     name: playwright-report
-      #     path: playwright-report/
-      #     retention-days: 30
+      - name: Print BASE_URL from .env
+        run: cat .env
+      - name: Run Playwright tests
+        run: ./ci/playwright_job.sh
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

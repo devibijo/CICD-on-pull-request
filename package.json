@@ -16,6 +16,6 @@
   "lint": "eslint --ext .ts,.js .",
   "lint-and-fix": "eslint . --ext .ts --fix",
   "build": "playwright install --with-deps",
-  "start": "playwright test --project=${{ matrix.browser }}"
+  "start": "playwright test"
 }
 }

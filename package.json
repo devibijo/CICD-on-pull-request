@@ -1,5 +1,5 @@
 {
-  "name": "Pipeline on Pull Request",
+  "name": "cicd_pipeline_playwright",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -12,10 +12,10 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.1"
   },
-  "scripts": {
-    "lint": "npx eslint --ext .ts,.js .",
-    "lint-and-fix": "npx eslint . --ext .ts --fix",
-    "build": "playwright install --with-deps",
-    "start": "npx playwright test"
-  }
+"scripts": {
+  "lint": "eslint --ext .ts,.js .",
+  "lint-and-fix": "eslint . --ext .ts --fix",
+  "build": "playwright install --with-deps",
+  "start": "playwright test --project=${{ matrix.browser }}"
+}
 }

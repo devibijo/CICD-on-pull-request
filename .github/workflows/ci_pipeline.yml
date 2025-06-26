@@ -27,6 +27,9 @@ jobs:
     if: github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'test')
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
     environment: DEV
     needs: lint
     steps:
@@ -39,6 +42,8 @@ jobs:
         run: cat .env
       - name: Run Playwright tests
         run: ./ci/playwright_job.sh
+        env:
+          browser: ${{ matrix.browser }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

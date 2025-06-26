@@ -7,9 +7,5 @@ set -euo pipefail
 echo "Installing Playwright Browsers..."
 npm run build
 
-set -a
-source .env
-set +a
-
-echo "Running Playwright tests..."
+echo "Running Playwright tests on browser ${browser}..."
 npm start

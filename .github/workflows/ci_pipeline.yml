@@ -6,39 +6,35 @@ on:
   pull_request:
     types: [labeled, synchronize, opened, reopened]
 jobs:
-  # try-secret:
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     MY_MESSAGE: ${{ secrets.MY_SECRET_MESSAGE }}
-  #   steps:
-  #     - name: Print secret
-  #       run: echo "Secret message is $MY_MESSAGE"
-
-  # lint:
-  #   timeout-minutes: 10
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: ./.github/setup-action
-  #     - name: Run lint job
-  #       run: ./ci/lint_job.sh
-  automation-tests:
-    # if: github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'test')
-    timeout-minutes: 60
+  try-secret:
     runs-on: ubuntu-latest
-    environment:
-      DEV
-      # url: ${{ vars.BASE_URL }}
-    # needs: lint
+    env:
+      MY_MESSAGE: ${{ secrets.MY_SECRET_MESSAGE }}
+    steps:
+      - name: Print secret
+        run: echo "Secret message is $MY_MESSAGE"
+
+  lint:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/setup-action
-      - name: print url
-        run: echo "URL is ${{ vars.BASE_URL }} "
-      - name: Create .env file
+      - name: Run lint job
+        run: ./ci/lint_job.sh
+
+  automation-tests:
+    if: github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'test')
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    environment: DEV
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/setup-action
+      - name: Create .env f
         run: |
           echo "BASE_URL=${{vars.BASE_URL}}" > .env
-
       - name: Print BASE_URL from .env
         run: cat .env
       - name: Run Playwright tests

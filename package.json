@@ -16,12 +16,12 @@
   "lint": "eslint --ext .ts,.js .",
   "lint-and-fix": "eslint . --ext .ts --fix",
   "build": "playwright install --with-deps",
-  "start": "playwright test --project=chromium",
   "test": "playwright test",
   "test-headless": "playwright test --headed",
   "test-report": "playwright show-report" ,
   "test-trace": "playwright test --trace on-first-retry",
   "test-debug": "pwsh ./ci/playwright_debug.sh",
+  "test-chromium": "playwright test --project=chromium",
   "test-firefox": "playwright test --project=firefox",
   "test-webkit": "playwright test --project=webkit"
 }

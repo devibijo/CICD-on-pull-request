@@ -8,4 +8,4 @@ echo "Installing Playwright Browsers..."
 npm run build
 
 echo "Running Playwright tests on browser ${browser}..."
-npm start
+npm test

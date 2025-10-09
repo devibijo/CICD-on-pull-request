@@ -22,19 +22,29 @@ jobs:
       - uses: ./.github/setup-action
       - name: Run lint job
         run: ./ci/lint_job.sh
+
   automation-tests:
     if: github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'test')
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+    environment: DEV
     needs: lint
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/setup-action
+      - name: Create .env file
+        run: |
+          echo "BASE_URL=${{vars.BASE_URL}}" > .env
       - name: Run Playwright tests
         run: ./ci/playwright_job.sh
+        env:
+          browser: ${{ matrix.browser }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report
+          name: my-artifact-${{ matrix.browser }} ${{ github.run_number }} # Makes the name unique for each run
           path: playwright-report/
-          retention-days: 30
+          retention-days: 1

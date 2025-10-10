@@ -1,0 +1,52 @@
+name: Playwright Version Notifier
+
+on:
+  pull_request:
+    paths:
+      - 'package.json'
+
+jobs:
+  notify-playwright-version-change:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get base and head package.json
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git show origin/${{ github.base_ref }}:package.json > base_package.json
+          cp package.json head_package.json
+
+      - name: Compare Playwright versions
+        id: compare
+        run: |
+          BASE_VERSION=$(jq -r '.devDependencies.playwright // .dependencies.playwright' base_package.json)
+          HEAD_VERSION=$(jq -r '.devDependencies.playwright // .dependencies.playwright' head_package.json)
+
+          echo "Base version: $BASE_VERSION"
+          echo "Head version: $HEAD_VERSION"
+
+          if [ "$BASE_VERSION" != "$HEAD_VERSION" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "base=$BASE_VERSION" >> $GITHUB_OUTPUT
+            echo "head=$HEAD_VERSION" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on PR if version changed
+        if: steps.compare.outputs.changed == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const base = '${{ steps.compare.outputs.base }}';
+            const head = '${{ steps.compare.outputs.head }}';
+            const releaseUrl = `https://github.com/microsoft/playwright/releases`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🔔 **Playwright version changed** from \`${base}\` to \`${head}\`.  
+              Please review compatibility and check [Playwright Release         });

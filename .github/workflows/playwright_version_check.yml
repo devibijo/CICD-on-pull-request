@@ -5,6 +5,11 @@ on:
     paths:
       - 'package.json'
 
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
 jobs:
   notify-playwright-version-change:
     runs-on: ubuntu-latest

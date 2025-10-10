@@ -21,8 +21,8 @@ jobs:
       - name: Compare Playwright versions
         id: compare
         run: |
-          BASE_VERSION=$(jq -r '.devDependencies.playwright // .dependencies.playwright' base_package.json)
-          HEAD_VERSION=$(jq -r '.devDependencies.playwright // .dependencies.playwright' head_package.json)
+          BASE_VERSION=$(jq -r '.devDependencies["@playwright/test"] // .dependencies["@playwright/test"] // empty' base_package.json)
+          HEAD_VERSION=$(jq -r '.devDependencies["@playwright/test"] // .dependencies["@playwright/test"] // empty' head_package.json)
 
           echo "Base version: $BASE_VERSION"
           echo "Head version: $HEAD_VERSION"

@@ -38,8 +38,14 @@ jobs:
       - name: Create .env file
         run: |
           echo "BASE_URL=${{vars.BASE_URL}}" > .env
-      - name: Run Playwright tests
-        run: ./ci/playwright_job.sh
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -t playwright-tests .
+
+      - name: Run Playwright tests in container
+        run: docker run --rm playwright-tests
         env:
           browser: ${{ matrix.browser }}
       - uses: actions/upload-artifact@v4

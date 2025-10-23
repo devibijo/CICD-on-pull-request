@@ -11,6 +11,4 @@ RUN npm install
 # Copy test files
 COPY . .
 
-RUN chmod +x playwright-job.sh
-
-CMD ["./playwright-job.sh"]
+CMD ["./ci/playwright_job.sh"]

@@ -54,5 +54,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `🔔 **Playwright Test version changed** from \`${base}\` to \`${head}\`.  
-Please review compatibility and check the [Playwright Release Notes](${releaseUrl}).`
+              Please review compatibility and check the [Playwright Release Notes](${releaseUrl}).`
             });
